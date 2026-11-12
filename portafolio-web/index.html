@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portafolio Kristal</title>
+<meta content="Nova ayuda a marcas a construir productos digitales que funcionan, desde el diseño hasta el código." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --paper: #010807;
+    --paper-dim: rgba(255, 255, 255, 0.82);
+    --panel: #871401;
+    --ink: #FFFFFF;
+    --ink-soft: rgba(255, 255, 255, 0.62);
+    --forest: #27877D;
+    --forest-dark: #871401;
+    --gold: #27877D;
+    --line: rgba(255, 255, 255, 0.14);
+
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --measure: 1120px;
+    --space-1: 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.75rem;
+    --space-4: 3rem;
+    --space-5: 5.5rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  /* ---------- Circuitos decorativos de esquina ---------- */
+  .circuit {
+    position: fixed;
+    width: 320px;
+    height: 320px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.55;
+  }
+
+  .circuit--tl {
+    top: -30px;
+    left: -30px;
+  }
+
+  .circuit--br {
+    bottom: -30px;
+    right: -30px;
+    transform: rotate(180deg);
+  }
+
+  .circuit-line {
+    fill: none;
+    stroke: #27877D;
+    stroke-width: 1.4;
+    stroke-dasharray: 5 5;
+    animation: circuit-flow 4s linear infinite;
+  }
+
+  .circuit-node {
+    fill: #27877D;
+    animation: node-pulse 2.6s ease-in-out infinite;
+  }
+
+  @keyframes circuit-flow {
+    to { stroke-dashoffset: -60; }
+  }
+
+  @keyframes node-pulse {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
+  ul { list-style: none; margin: 0; padding: 0; }
+  p { margin: 0 0 var(--space-2); }
+  img, svg { display: block; }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: transparent;
+    transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav.is-scrolled {
+    background: rgba(0, 38, 48, 0.92);
+    backdrop-filter: blur(8px);
+    border-color: var(--line);
+  }
+
+  .nav__inner {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: var(--space-2) var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav__brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .nav__links a:not(.btn) {
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    transition: color 0.2s ease;
+  }
+
+  .nav__links a:not(.btn):hover {
+    color: var(--ink);
+  }
+
+  .nav__toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 0.4rem;
+    cursor: pointer;
+  }
+
+  .nav__toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    margin: 5px 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .nav.is-open .nav__toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav.is-open .nav__toggle span:nth-child(2) { opacity: 0; }
+  .nav.is-open .nav__toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.6rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .btn:active { transform: translateY(1px); }
+
+  .btn--primary {
+    background: var(--forest);
+    color: var(--paper);
+  }
+
+  .btn--primary:hover { filter: brightness(1.18); }
+
+  .btn--ghost {
+    background: transparent;
+    border-color: var(--line);
+    color: var(--ink);
+  }
+
+  .btn--ghost:hover { border-color: var(--forest-dark); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: var(--space-5) 0 var(--space-4);
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .hero__lead {
+    color: var(--ink-soft);
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 var(--space-2);
+  }
+
+  .hero__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+    line-height: 1.08;
+    margin: 0 0 var(--space-3);
+    max-width: 16ch;
+  }
+
+  .hero__desc {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin-bottom: var(--space-3);
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-4);
+  }
+
+  .hero__stats {
+    display: flex;
+    gap: var(--space-4);
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-3);
+    max-width: 46ch;
+  }
+
+  .stat__num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    display: block;
+  }
+
+  .stat__label {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  .hero__art {
+    position: relative;
+    aspect-ratio: 1 / 1;
+  }
+
+  .hero__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 50%;
+    border: 4px solid var(--forest);
+  }
+
+  /* ---------- Services ---------- */
+  .section {
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .section__head {
+    max-width: 52ch;
+    margin-bottom: var(--space-4);
+  }
+
+  .section__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin: 0 0 var(--space-2);
+  }
+
+  .section__desc {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-3);
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--ink);
+  }
+
+  .projects__group-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 0 0 var(--space-3);
+  }
+
+  .projects__group-title--spaced {
+    margin-top: var(--space-5);
+  }
+
+  .skills-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+    gap: 0.65rem;
+    margin: 0 0 var(--space-3);
+    max-width: 760px;
+  }
+
+  .skill-card {
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 0.7rem 0.85rem;
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .skill-card__mark {
+    flex: 0 0 auto;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--forest);
+    color: var(--paper);
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  .skill-card__name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .activities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3) var(--space-3);
+  }
+
+  .activity-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: var(--space-2);
+  }
+
+  .activity-card__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: var(--space-2);
+    background: var(--paper);
+  }
+
+  .activity-card__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin: 0 0 var(--space-1);
+  }
+
+  .activity-card__desc {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .activity-carousel {
+    position: relative;
+    margin-bottom: var(--space-2);
+  }
+
+  .activity-carousel__track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .activity-carousel__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .activity-carousel__image.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .activity-carousel__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--ink);
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .activity-carousel__arrow--prev {
+    left: 6px;
+  }
+
+  .activity-carousel__arrow--next {
+    right: 6px;
+  }
+
+  .activity-carousel__arrow:hover {
+    background: rgba(0, 0, 0, 0.75);
+  }
+
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3) var(--space-3);
+  }
+
+  .project {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .project:hover {
+    transform: translateY(-4px);
+  }
+
+  .project:hover .project__image {
+    border-color: var(--forest);
+  }
+
+  .project__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: var(--space-2);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    transition: border-color 0.2s ease;
+  }
+
+  .project__details {
+    display: none;
+  }
+
+  .project__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 0 var(--space-1);
+  }
+
+  .project__desc {
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 42ch;
+  }
+
+  /* ---------- CTA band ---------- */
+  .cta {
+    background: var(--panel);
+    color: var(--ink);
+    border-radius: 8px;
+    padding: var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .cta__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin: 0;
+    max-width: 26ch;
+  }
+
+  .cta .btn--primary {
+    background: var(--gold);
+    color: var(--paper);
+  }
+
+  .cta .btn--primary:hover {
+    filter: brightness(1.18);
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    background: var(--panel);
+    color: var(--paper-dim);
+    padding: var(--space-4) 0 var(--space-3);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .footer__brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin: 0 0 var(--space-2);
+  }
+
+  .footer__tagline {
+    max-width: 32ch;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+  }
+
+  .footer__heading {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0 0 var(--space-2);
+  }
+
+  .footer__list li {
+    margin-bottom: var(--space-1);
+  }
+
+  .footer__list a {
+    text-decoration: none;
+    color: var(--paper-dim);
+    font-size: 0.95rem;
+  }
+
+  .footer__list a:hover {
+    color: var(--gold);
+  }
+
+  .footer__bottom {
+    padding-top: var(--space-3);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  /* ---------- Experiencia ---------- */
+  .experience {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .experience-item {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .experience-item:first-child {
+    border-top: none;
+  }
+
+  .experience-period {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    padding-top: 0.2rem;
+  }
+
+  .experience-role {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 0 0 var(--space-1);
+  }
+
+  .experience-company {
+    color: var(--forest);
+    font-size: 0.95rem;
+    margin: 0 0 var(--space-1);
+  }
+
+  .experience-location {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin: 0 0 var(--space-2);
+  }
+
+  .experience-duration {
+    color: var(--ink-soft);
+    opacity: 0.8;
+  }
+
+  .experience-list {
+    margin: var(--space-2) 0 0;
+    padding-left: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 52ch;
+  }
+
+  .experience-list li {
+    margin-bottom: var(--space-1);
+  }
+
+  .experience-list li::marker {
+    color: var(--forest);
+  }
+
+  /* ---------- Carrusel de herramientas ---------- */
+  .carousel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .carousel__track {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: var(--space-1);
+    scrollbar-width: none;
+  }
+
+  .carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel__card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: 180px;
+    padding: var(--space-3) var(--space-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .carousel__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--forest);
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+
+  .carousel__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin: 0 0 var(--space-1);
+  }
+
+  .carousel__note {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .carousel__arrow {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: none;
+    color: var(--ink);
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .carousel__arrow:hover {
+    border-color: var(--forest);
+    color: var(--forest);
+  }
+
+  /* ---------- Idiomas ---------- */
+  .languages {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .language-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+    min-width: 160px;
+    padding: var(--space-3);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s ease;
+  }
+
+  .language-card:hover {
+    border-color: var(--forest);
+  }
+
+  .language-card__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .language-card__level {
+    color: var(--forest);
+    font-size: 0.9rem;
+  }
+
+  .language-card__hint {
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    margin-top: var(--space-1);
+  }
+
+  /* ---------- Lightbox de certificados ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3);
+  }
+
+  .lightbox[hidden] {
+    display: none !important;
+  }
+
+  .lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .lightbox__box {
+    position: relative;
+    z-index: 1;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+
+  .lightbox__image {
+    display: block;
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 6px;
+  }
+
+  .lightbox__image[hidden] {
+    display: none !important;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--forest);
+    color: var(--paper);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .experience-desc {
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 48ch;
+  }
+
+  /* ---------- Vista previa automática de YouTube ---------- */
+  .project__youtube-preview {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 8px;
+    background: #000;
+    margin-bottom: var(--space-2);
+  }
+
+  /* ---------- Detalle de proyecto ---------- */
+  .detail__video {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    max-height: 78vh;
+    margin: 0 auto var(--space-3);
+    border-radius: 8px;
+    background: #000;
+  }
+
+  .detail__video[hidden],
+  .detail__image[hidden] {
+    display: none !important;
+  }
+
+  #detalleYoutube {
+    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: none;
+    border: none;
+  }
+
+  .detail__image {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: var(--space-3);
+  }
+
+  .detail__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    margin: 0 0 var(--space-2);
+  }
+
+  .detail__desc {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 60ch;
+  }
+
+  .detail__extra {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    max-width: 640px;
+  }
+
+  .detail__extra img {
+    width: 160px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .detail__extra img:hover {
+    border-color: var(--forest);
+  }
+
+  .detail__extra video {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+
+  .detail__extra p {
+    width: 100%;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    margin-top: 0;
+  }
+
+  .detail__extra a {
+    color: var(--forest);
+    word-break: break-all;
+  }
+
+  /* ---------- Lightbox de galería ---------- */
+  .lightbox__box--gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox__arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--ink);
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .lightbox__arrow:hover {
+    background: rgba(0, 0, 0, 0.75);
+  }
+
+  .lightbox__arrow--prev {
+    left: 16px;
+  }
+
+  .lightbox__arrow--next {
+    right: 16px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__art {
+      order: -1;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .projects {
+      grid-template-columns: 1fr;
+    }
+
+    .activities {
+      grid-template-columns: 1fr;
+    }
+
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .nav__links {
+      position: fixed;
+      inset: 60px var(--space-3) auto var(--space-3);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--space-3);
+      gap: var(--space-2);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav.is-open .nav__links {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav__toggle {
+      display: block;
+    }
+
+    .cta {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .experience-item {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+
+    .hero__stats {
+      gap: var(--space-3);
+    }
+
+    .stat__num {
+      font-size: 1.3rem;
+    }
+  }
+
+  /* ---------- Sección Videojuegos Unreal ---------- */
+  .unreal-zone {
+    position: relative;
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-3);
+    border-radius: 14px;
+    border: 1px solid rgba(39, 135, 125, 0.55);
+    background:
+      radial-gradient(circle at 12% 0%, rgba(39, 135, 125, 0.35), transparent 55%),
+      radial-gradient(circle at 95% 100%, rgba(135, 20, 1, 0.5), transparent 55%),
+      #040d0c;
+    box-shadow: 0 0 45px rgba(39, 135, 125, 0.22), inset 0 0 60px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .unreal-zone::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.07) 50%, transparent 65%);
+    transform: translateX(-100%);
+    animation: unreal-sweep 6s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  @keyframes unreal-sweep {
+    0%, 30% { transform: translateX(-100%); }
+    70%, 100% { transform: translateX(100%); }
+  }
+
+  .unreal-zone__badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.06);
+    margin-bottom: var(--space-2);
+  }
+
+  .unreal-zone__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 4.2vw, 3rem);
+    line-height: 1.05;
+    margin: 0 0 var(--space-1);
+    background: linear-gradient(90deg, #ffffff 0%, #7fe0d4 45%, #ff6a4d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .unreal-zone__desc {
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin-bottom: var(--space-3);
+  }
+
+  .unreal-zone .skill-card {
+    border-color: rgba(39, 135, 125, 0.5);
+    background: rgba(39, 135, 125, 0.08);
+  }
+
+  .projects--unreal {
+    grid-template-columns: 1fr;
+  }
+
+  .project--featured {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: 1fr auto 1fr;
+    column-gap: var(--space-4);
+    align-items: center;
+  }
+
+  .project--featured .project__image {
+    grid-row: 1 / span 3;
+    margin: 0;
+    border-radius: 10px;
+    border-color: rgba(39, 135, 125, 0.6);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(39, 135, 125, 0.3);
+  }
+
+  .project--featured:hover .project__image {
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 45px rgba(255, 106, 77, 0.45);
+  }
+
+  .project--featured .project__title {
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    align-self: end;
+  }
+
+  .project--featured .project__desc {
+    max-width: 40ch;
+    margin-top: var(--space-1);
+  }
+
+  .unreal-cta {
+    justify-self: start;
+    align-self: start;
+    margin-top: var(--space-2);
+    padding: 0.7rem 1.3rem;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--forest), #871401);
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 0 22px rgba(39, 135, 125, 0.45);
+  }
+
+  @media (max-width: 860px) {
+    .project--featured {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .project--featured .project__image {
+      grid-row: auto;
+      margin-bottom: var(--space-2);
+    }
+  }
+</style>
+</head>
+<body>
+<svg aria-hidden="true" class="circuit circuit--tl" viewbox="0 0 320 320">
+<g>
+<path class="circuit-line" d="M0 40 L60 40 L60 80 L110 80 L110 50 L150 50"></path>
+<path class="circuit-line" d="M0 100 L30 100 L30 140 L90 140 L90 180 L140 180 L140 130 L190 130"></path>
+<path class="circuit-line" d="M40 0 L40 20 L80 20 L80 60"></path>
+<path class="circuit-line" d="M150 50 L150 10 L200 10"></path>
+<path class="circuit-line" d="M190 130 L230 130 L230 90 L270 90"></path>
+<path class="circuit-line" d="M110 80 L110 110 L140 110"></path>
+<path class="circuit-line" d="M0 180 L50 180"></path>
+<g class="circuit-node">
+<circle cx="60" cy="40" r="3"></circle>
+<circle cx="110" cy="80" r="3"></circle>
+<circle cx="150" cy="50" r="3"></circle>
+<circle cx="30" cy="140" r="3"></circle>
+<circle cx="90" cy="140" r="3"></circle>
+<circle cx="90" cy="180" r="3"></circle>
+<circle cx="140" cy="180" r="3"></circle>
+<circle cx="140" cy="130" r="3"></circle>
+<circle cx="190" cy="130" r="3"></circle>
+<circle cx="80" cy="20" r="3"></circle>
+<circle cx="80" cy="60" r="3"></circle>
+<circle cx="200" cy="10" r="3"></circle>
+<circle cx="230" cy="130" r="3"></circle>
+<circle cx="230" cy="90" r="3"></circle>
+<circle cx="140" cy="110" r="3"></circle>
+</g>
+</g>
+</svg>
+<svg aria-hidden="true" class="circuit circuit--br" viewbox="0 0 320 320">
+<g>
+<path class="circuit-line" d="M0 40 L60 40 L60 80 L110 80 L110 50 L150 50"></path>
+<path class="circuit-line" d="M0 100 L30 100 L30 140 L90 140 L90 180 L140 180 L140 130 L190 130"></path>
+<path class="circuit-line" d="M40 0 L40 20 L80 20 L80 60"></path>
+<path class="circuit-line" d="M150 50 L150 10 L200 10"></path>
+<path class="circuit-line" d="M190 130 L230 130 L230 90 L270 90"></path>
+<path class="circuit-line" d="M110 80 L110 110 L140 110"></path>
+<path class="circuit-line" d="M0 180 L50 180"></path>
+<g class="circuit-node">
+<circle cx="60" cy="40" r="3"></circle>
+<circle cx="110" cy="80" r="3"></circle>
+<circle cx="150" cy="50" r="3"></circle>
+<circle cx="30" cy="140" r="3"></circle>
+<circle cx="90" cy="140" r="3"></circle>
+<circle cx="90" cy="180" r="3"></circle>
+<circle cx="140" cy="180" r="3"></circle>
+<circle cx="140" cy="130" r="3"></circle>
+<circle cx="190" cy="130" r="3"></circle>
+<circle cx="80" cy="20" r="3"></circle>
+<circle cx="80" cy="60" r="3"></circle>
+<circle cx="200" cy="10" r="3"></circle>
+<circle cx="230" cy="130" r="3"></circle>
+<circle cx="230" cy="90" r="3"></circle>
+<circle cx="140" cy="110" r="3"></circle>
+</g>
+</g>
+</svg>
+<nav class="nav" id="nav">
+<div class="nav__inner">
+<a class="nav__brand" data-view-link="inicio" href="#inicio">Portafolio</a>
+<ul class="nav__links" id="navLinks">
+<li><a data-view-link="proyectos" href="#proyectos">Proyectos</a></li>
+<li><a href="#contacto">Contacto</a></li>
+<li><a class="btn btn--primary" href="#contacto">Contactar</a></li>
+</ul>
+<button aria-expanded="false" aria-label="Abrir menú" class="nav__toggle" id="navToggle">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<main>
+<div class="view" id="view-inicio">
+<header class="wrap hero" id="inicio">
+<div>
+<p class="hero__lead">Desarrolladora de Tecnología Interactiva / Ingeniera</p>
+<h1 class="hero__title">Sobre mí</h1>
+<p class="hero__desc">
+          Soy Kristal Esperanza Espinoza Campos, Soy programadora de videojuegos orientado al desarrollo de experiencias interactivas. Me interesa especialmente la integración entre tecnología, creatividad y mundo físico para crear proyectos con propósito.
+
+Destaco por mi liderazgo, adaptabilidad y capacidad para enfrentar nuevos desafíos tecnológicos.
+        </p>
+<div class="hero__actions">
+<a class="btn btn--primary" href="#contacto">Contactar</a>
+<a class="btn btn--ghost" data-view-link="proyectos" href="#proyectos">Ver proyectos</a>
+</div>
+</div>
+<div class="hero__art">
+<img alt="Foto de la autora del portafolio" class="hero__photo" src="assets/img-01-527d1ddbd2.jpg"/>
+</div>
+</header>
+<section class="wrap section" id="experiencia">
+<div class="section__head">
+<h2 class="section__title">Experiencia laboral</h2>
+</div>
+<div class="experience">
+<div class="experience-item">
+<div class="experience-period">Abr. 2026 - Dic. 2026<br/><span class="experience-duration">9 meses</span></div>
+<div class="experience-body">
+<h3 class="experience-role">Representante Estudiantil – Comité Curricular</h3>
+<p class="experience-company">Universidad Bernardo O'Higgins · Contrato temporal</p>
+<p class="experience-location">Región Metropolitana de Santiago, Chile</p>
+<p class="experience-desc">
+              Participación como representante estudiantil en el Comité Curricular de la carrera de Ingeniería en Realidad Virtual y Diseño de Juegos Digitales, colaborando en el análisis, revisión y mejora de aspectos académicos y curriculares. Aporte de perspectivas y propuestas desde la experiencia estudiantil, participando en instancias de discusión y evaluación junto al equipo académico y curricular de la Facultad.
+            </p>
+</div>
+</div>
+<div class="experience-item">
+<div class="experience-period">Dic. 2024 - Feb. 2025<br/><span class="experience-duration">3 meses</span></div>
+<div class="experience-body">
+<h3 class="experience-role">Asistente de investigación</h3>
+<p class="experience-company">Universidad Bernardo O'Higgins · Contrato temporal</p>
+<p class="experience-location">Región Metropolitana de Santiago, Chile · Presencial</p>
+<p class="experience-desc">
+              Trabajo de investigación sobre avatares diferentes con hápticas, en colaboración con el University College London (Knowledge Lab) y la Université PSL (Spatial Media).
+            </p>
+<ul class="experience-list">
+<li>Desarrollo de un protocolo para un sistema de avatares no antropomórficos y no figurativos mediante un sistema de estimulación muscular eléctrica.</li>
+<li>Recopilación y análisis de datos de biofeedback y sensores para la evaluación de los experimentos.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="wrap section" id="idiomas">
+<div class="section__head">
+<h2 class="section__title">Idiomas</h2>
+</div>
+<div class="languages">
+<button class="language-card" data-cert="certIngles" type="button">
+<span class="language-card__name">Inglés</span>
+<span class="language-card__level">B2</span>
+<span class="language-card__hint">Ver certificado</span>
+</button>
+<button class="language-card" data-cert="certFrances" type="button">
+<span class="language-card__name">Francés</span>
+<span class="language-card__level">Inicial</span>
+<span class="language-card__hint">Ver certificado</span>
+</button>
+</div>
+</section>
+</div>
+<div class="lightbox" hidden="" id="certLightbox">
+<div class="lightbox__backdrop" data-lightbox-close=""></div>
+<div class="lightbox__box">
+<button aria-label="Cerrar" class="lightbox__close" data-lightbox-close="" type="button">×</button>
+<img alt="Certificado Oxford Placement Test - Inglés B2" class="lightbox__image" hidden="" id="certIngles" src="assets/img-02-8ff428f4a9.jpg"/>
+<img alt="Certificado ILEC - Francés Inicial" class="lightbox__image" hidden="" id="certFrances" src="assets/img-03-b3fb000bc8.jpg"/>
+</div>
+</div>
+<div class="lightbox" hidden="" id="galleryLightbox">
+<div class="lightbox__backdrop" data-gallery-close=""></div>
+<button aria-label="Imagen anterior" class="lightbox__arrow lightbox__arrow--prev" id="galleryPrev" type="button">←</button>
+<div class="lightbox__box lightbox__box--gallery">
+<button aria-label="Cerrar" class="lightbox__close" data-gallery-close="" type="button">×</button>
+<img alt="" class="lightbox__image" id="galleryImage"/>
+</div>
+<button aria-label="Imagen siguiente" class="lightbox__arrow lightbox__arrow--next" id="galleryNext" type="button">→</button>
+</div>
+<div class="view" hidden="" id="view-proyectos">
+<section class="wrap section" id="proyectos">
+<a class="back-link" data-view-link="inicio" href="#inicio">← Volver al inicio</a>
+<div class="section__head">
+<h2 class="section__title">Proyectos</h2>
+<p class="section__desc">
+          
+        </p>
+</div>
+<h3 class="projects__group-title">Programación e Innovación</h3>
+<div class="skills-row">
+        <div class="skill-card"><span class="skill-card__mark">C++</span><span class="skill-card__name">C++</span></div>
+        <div class="skill-card"><span class="skill-card__mark">A</span><span class="skill-card__name">Arduino</span></div>
+        <div class="skill-card"><span class="skill-card__mark">U</span><span class="skill-card__name">Unity</span></div>
+        <div class="skill-card"><span class="skill-card__mark">S</span><span class="skill-card__name">Sensores</span></div>
+      </div>
+<div class="projects">
+<button aria-expanded="false" class="project" type="button">
+<img alt="Videojuego Shooter con Electromiograma" class="project__image" src="assets/img-04-e3787bf5f0.jpg"/>
+<h3 class="project__title">Videojuego Shooter con Electromiograma</h3>
+<p class="project__desc">Presento EMG SHOOTER, un innovador proyecto que busca brindar accesibilidad a personas con discapacidad manual en el mundo de los videojuegos.</p>
+<div class="project__details" hidden="">
+<div class="project__full-desc">
+<p>Presento EMG SHOOTER, un innovador proyecto que busca brindar accesibilidad a personas con discapacidad manual en el mundo de los videojuegos. Mi idea es crear un videojuego shooter que se controle mediante la intención de movimiento del brazo, utilizando señales biológicas para detectar el movimiento.</p>
+<p>Para lograr esto, utilicé tecnologías como Unity y Arduino, conectándolas para que las ondas eléctricas de las señales biológicas del brazo sean detectadas por Unity como un disparo, cuando se lea una amplitud de las ondas.</p>
+</div>
+<img alt="Nota sobre el proyecto EMG Shooter" class="project__extra-image" src="assets/img-05-ff4b0a32d2.jpg"/>
+<p class="project__extra-caption">Mención y reconocimiento de mi proyecto EMG Shooter en la sección de noticias carrera en Ingeniería en Realidad Virtual y Diseño de Juegos Digitales.<br/>
+<a href="https://admision.ubo.cl/emg-shooter-videojuego-con-tecnologia-bionica-que-revoluciona-la-accesibilidad" rel="noopener" target="_blank">admision.ubo.cl/emg-shooter-videojuego-con-tecnologia-bionica-que-revoluciona-la-accesibilidad</a>
+</p>
+<video class="project__extra-video" preload="none" src="assets/video-06-74d205f45e.mp4"></video>
+</div>
+</button>
+<button aria-expanded="false" class="project" type="button">
+<img alt="Electrocardiograma aplicado en Unity" class="project__image" src="assets/img-07-41c90bd552.jpg"/>
+<h3 class="project__title">Electrocardiograma aplicado en Unity</h3>
+<p class="project__desc">Se usó un electrocardiograma para un proyecto conectado a Unity, donde cada pulso se traducía en un efecto dentro del motor.</p>
+<div class="project__details" hidden="">
+<div class="project__full-desc">
+<p>Se ocupó un electrocardiograma para realizar un proyecto conectado a Unity, donde cada pulso se traducía a un efecto en el motor de Unity.</p>
+</div>
+<img alt="Electrodos conectados al Arduino" class="project__extra-image" src="assets/img-08-1f4e5e8ab1.jpg"/>
+<video class="project__extra-video" preload="none" src="assets/video-09-cb6be9dbdb.mp4"></video>
+</div>
+</button>
+</div>
+<h3 class="projects__group-title projects__group-title--spaced">Videojuegos Unity</h3>
+<div class="skills-row">
+<div class="skill-card"><span class="skill-card__mark">U</span><span class="skill-card__name">Unity</span></div>
+<div class="skill-card"><span class="skill-card__mark">P</span><span class="skill-card__name">Photon</span></div>
+</div>
+<div class="projects">
+<button aria-expanded="false" class="project" type="button">
+<img alt="Cracked Brain - pantalla de inicio" class="project__image" src="assets/img-10-8aba0243c4.jpg"/>
+<h3 class="project__title">Cracked Brain</h3>
+<p class="project__desc">Videojuego multijugador tipo Deathmatch desarrollado en Unity utilizando Photon para funcionalidades multijugador en tiempo real.</p>
+<div class="project__details" hidden="">
+<div class="project__full-desc">
+<p>Proyecto desarrollado en Unity utilizando Photon para la implementación de funcionalidades multijugador en tiempo real. Se desarrolló un videojuego multiplayer de tipo Deathmatch, incorporando sincronización de jugadores, sistema de combate y gestión de partidas.</p>
+</div>
+<video class="project__extra-video" preload="none"  src="assets/video-11-0aa9308111.mp4"></video>
+<video class="project__extra-video-secondary" muted controls="" preload="none" src="assets/video-12-3b3175f2ab.mp4"></video>
+</div>
+</button>
+</div>
+<div class="unreal-zone">
+<div class="unreal-zone__head">
+<span class="unreal-zone__badge">Unreal Engine</span>
+<h3 class="unreal-zone__title">Videojuegos Unreal</h3>
+<p class="unreal-zone__desc">Cinemáticas y jugabilidad: escenarios, texturizado, Timeline y Blueprints.</p>
+</div>
+<div class="skills-row">
+<div class="skill-card"><span class="skill-card__mark">U</span><span class="skill-card__name">Unreal</span></div>
+<div class="skill-card"><span class="skill-card__mark">B</span><span class="skill-card__name">Blueprints</span></div>
+<div class="skill-card"><span class="skill-card__mark">T</span><span class="skill-card__name">Timeline</span></div>
+</div>
+<div class="projects projects--unreal">
+<button aria-expanded="false" class="project project--featured" data-youtube="oVrIo5YjJWE" type="button">
+
+<img alt="Escenario 3D - render del escenario" class="project__image" src="assets/img-13-e65ad56c24.png"/>
+<h3 class="project__title">Cinematica/Jugabilidad en Unreal Engine</h3>
+<p class="project__desc">Trabajo de realización de escenario, trabaje en Uv, texturizado, implementación del Timeline y Blueprints en el motor</p>
+<span class="unreal-cta">▶ Ver cinemática</span>
+<div class="project__details" hidden="">
+<div class="project__full-desc"><p>Trabajo de realización de escenario, trabaje en Uv, texturizado, implementación del Timeline y Blueprints en el motor</p></div>
+<img alt="Escenario 3D - vista renderizada" class="project__extra-image" src="assets/img-13-e65ad56c24.png"/>
+<img alt="Escenario 3D - detalle del render" class="project__extra-image" src="assets/img-14-c4d6659586.png"/>
+<img alt="Escenario 3D - vista del proyecto en Blender" class="project__extra-image" src="assets/img-15-0009b2f9ed.png"/>
+</div>
+</button>
+</div>
+</div>
+<h3 class="projects__group-title projects__group-title--spaced">Portafolio Arte</h3>
+<div class="skills-row">
+<div class="skill-card"><span class="skill-card__mark">B</span><span class="skill-card__name">Blender</span></div>
+<div class="skill-card"><span class="skill-card__mark">Z</span><span class="skill-card__name">ZBrush</span></div>
+<div class="skill-card"><span class="skill-card__mark">M</span><span class="skill-card__name">Marvelous</span></div>
+<div class="skill-card"><span class="skill-card__mark">M</span><span class="skill-card__name">Marmoset</span></div>
+</div>
+<div class="projects">
+<button aria-expanded="false" class="project" type="button">
+<img alt="Escena 3D de ambientación - render final" class="project__image" src="assets/img-16-dfc0326378.jpg"/>
+<h3 class="project__title">Representación Resident Evil 7</h3>
+<p class="project__desc">Trabajé en un proyecto inspirado en el videojuego Resident Evil 7, realicé modelado, UV, texturizado con pintado digital a mano y render.</p>
+<div class="project__details" hidden="">
+<div class="project__full-desc">
+<p>Trabajé en un proyecto inspirado en el videojuego Resident Evil 7, realicé modelado, UV, texturizado con pintado digital a mano y render.</p>
+</div>
+<img alt="Wireframe de la escena" class="project__extra-image" src="assets/img-17-98b021e5b9.jpg"/>
+<img alt="Vista con IDs de color de los objetos" class="project__extra-image" src="assets/img-18-edbbde5291.jpg"/>
+<img alt="Render de la escena, ángulo alternativo" class="project__extra-image" src="assets/img-19-3cb960e060.jpg"/>
+<img alt="Render de la escena, otro ángulo" class="project__extra-image" src="assets/img-20-32629f3383.jpg"/>
+<img alt="Render en clay, sin texturas" class="project__extra-image" src="assets/img-21-6ecd28ef2b.jpg"/>
+<img alt="Detalle de la cocina" class="project__extra-image" src="assets/img-22-a70813e671.jpg"/>
+</div>
+</button>
+<button aria-expanded="false" class="project" type="button">
+<img alt="Escultura de personaje - vista frontal" class="project__image" src="assets/img-23-fa0454a884.jpg"/>
+<h3 class="project__title">Escultura de Personaje</h3>
+<p class="project__desc">Creación de un personaje a través de escultura y pintado en ZBrush, con simulación de ropa en Marvelous Designer y render en Marmoset.</p>
+<div class="project__details" hidden="">
+<div class="project__full-desc">
+<p>Creación de un personaje a través de escultura y pintado en ZBrush. Se realizaron los pliegues de ropa en Marvelous Designer y renderizado en Marmoset.</p>
+</div>
+<img alt="Escultura de personaje - render 1" class="project__extra-image" src="assets/img-24-e08324da14.jpg"/>
+<img alt="Escultura de personaje - render 2" class="project__extra-image" src="assets/img-25-422f011b3f.jpg"/>
+<img alt="Escultura de personaje - render 3" class="project__extra-image" src="assets/img-26-c997aae8d6.jpg"/>
+<img alt="Escultura de personaje - render 4" class="project__extra-image" src="assets/img-27-9ed0e3005d.jpg"/>
+<img alt="Escultura de personaje - render 5" class="project__extra-image" src="assets/img-28-42ea8dd604.jpg"/>
+<img alt="Escultura de personaje - render 6" class="project__extra-image" src="assets/img-29-b6673e5cde.jpg"/>
+<video class="project__extra-video" preload="none" src="assets/video-30-8b3a62c66d.mp4"></video>
+<video class="project__extra-video-secondary" controls="" preload="none" src="assets/video-31-ad8eec6fd7.mp4"></video>
+</div>
+</button>
+<button aria-expanded="false" class="project" type="button">
+<img alt="Bosque Kokiri - vista completa del mapa" class="project__image" src="assets/img-32-c14f579678.jpg"/>
+<h3 class="project__title">Recreación de Bosque Kokiri</h3>
+<p class="project__desc">Recreación del escenario Bosque Kokiri de The Legend of Zelda: Ocarina of Time, con modelado y texturizado en Blender.</p>
+<div class="project__details" hidden="">
+<div class="project__full-desc">
+<p>Recreación del escenario Bosque Kokiri del videojuego The Legend of Zelda: Ocarina of Time. Se realizaron modelos y texturas en Blender, se exportó al motor de Unity donde se utilizaron herramientas de optimización como Level of Detail (LOD) y Occlusion Culling.</p>
+</div>
+<img alt="Tronco con puerta - Bosque Kokiri" class="project__extra-image" src="assets/img-33-69abbe0700.jpg"/>
+<img alt="Tronco doble - Bosque Kokiri" class="project__extra-image" src="assets/img-34-fafd03d5e8.jpg"/>
+<img alt="Palmera - Bosque Kokiri" class="project__extra-image" src="assets/img-35-6bc95f0fc5.jpg"/>
+<video class="project__extra-video" preload="none" src="assets/video-36-09ea5cf7fe.mp4"></video>
+</div>
+</button>
+</div>
+<h3 class="projects__group-title projects__group-title--spaced">Otras actividades</h3>
+<div class="skills-row">
+<div class="skill-card"><span class="skill-card__mark">L</span><span class="skill-card__name">Liderazgo</span></div>
+<div class="skill-card"><span class="skill-card__mark">C</span><span class="skill-card__name">Compromiso</span></div>
+<div class="skill-card"><span class="skill-card__mark">R</span><span class="skill-card__name">Responsabilidad</span></div>
+</div>
+<div class="activities">
+<div class="activity-card">
+<div class="activity-carousel">
+<button aria-label="Imagen anterior" class="activity-carousel__arrow activity-carousel__arrow--prev" type="button">←</button>
+<div class="activity-carousel__track">
+<img alt="Ponencia sentada en el panel del congreso" class="activity-carousel__image is-active" src="assets/img-37-2768a6a1d4.jpg"/>
+<img alt="Credencial de expositora, Kristal Espinoza" class="activity-carousel__image" src="assets/img-38-f2636a9201.jpg"/>
+<img alt="Pantalla con la diapositiva de ejemplos, EMG Shooter" class="activity-carousel__image" src="assets/img-39-9f3aac5292.jpg"/>
+<img alt="Certificado de participación como expositora" class="activity-carousel__image" src="assets/img-40-2a4e5d222f.jpg"/>
+</div>
+<button aria-label="Imagen siguiente" class="activity-carousel__arrow activity-carousel__arrow--next" type="button">→</button>
+</div>
+<h3 class="activity-card__title">Charlista en eventos de tecnología y videojuegos</h3>
+<p class="activity-card__desc">Realizo activamente charlas sobre videojuegos biónicos, accesibilidad y tecnología, imágenes de ponencia en el tercer Congreso de Diseño de Juegos Digitales: Cultura y Videojuegos de la Universidad Andrés Bello.</p>
+</div>
+<div class="activity-card">
+<img alt="Certificado de participación en Academia de Liderazgo UBO" class="activity-card__image" src="assets/img-41-f3cbfdf121.jpg"/>
+<h3 class="activity-card__title">Participación en Academia de Liderazgo UBO</h3>
+<p class="activity-card__desc">Taller donde pude fortalecer mis habilidades de comunicación, liderazgo y trabajo en equipo.</p>
+</div>
+<div class="activity-card">
+<div class="activity-carousel">
+<button aria-label="Anterior" class="activity-carousel__arrow activity-carousel__arrow--prev" type="button">←</button>
+<div class="activity-carousel__track">
+<img alt="Certificado de Reconocimiento Social Impact Game" class="activity-carousel__image is-active" src="assets/img-42-9a69b74990.jpg"/>
+<video class="activity-carousel__image" controls="" preload="none" src="assets/video-43-affb8e56a2.mp4"></video>
+</div>
+<button aria-label="Siguiente" class="activity-carousel__arrow activity-carousel__arrow--next" type="button">→</button>
+</div>
+<h3 class="activity-card__title">Certificado de Reconocimiento Social Impact Game</h3>
+<p class="activity-card__desc">Expedido por Ministerio de Educación · may. 2024. Reconocimiento por Lograr Segundo Lugar en Game Jam Social Impact Game.</p>
+</div>
+</div>
+</section>
+</div>
+<div class="view" hidden="" id="view-detalle">
+<section class="wrap section">
+<a class="back-link" data-view-link="proyectos" href="#proyectos">← Volver a proyectos</a>
+<video autoplay="" class="detail__video" controls="" hidden="" id="detalleVideo" loop="" muted="" playsinline=""></video>
+<iframe allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen="" class="detail__video" hidden="" id="detalleYoutube" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<img alt="" class="detail__image" id="detalleImagen"/>
+<h2 class="detail__title" id="detalleTitulo"></h2>
+<div class="detail__desc" id="detalleDesc"></div>
+<div class="detail__extra" id="detalleExtra"></div>
+</section>
+</div>
+<section class="wrap section">
+<div class="cta">
+<h2 class="cta__title">Disponible para hablar</h2>
+<a class="btn btn--primary" href="https://wa.me/+56942022914">Conversemos</a>
+</div>
+</section>
+</main>
+<footer class="footer" id="contacto">
+<div class="wrap">
+<div class="footer__grid">
+<div>
+<p class="footer__brand">Portafolio</p>
+<p class="footer__tagline">
+            Una selección de proyectos y trabajo reciente.
+          </p>
+</div>
+<div>
+<ul class="footer__list">
+<li>kristalesperanzaespinoza@gmail.com</li>
+<li>+56 9 4202 2914</li>
+<li>Santiago, Chile</li>
+</ul>
+</div>
+<div>
+<p class="footer__heading">Sígueme</p>
+<ul class="footer__list">
+<li><a href="https://www.instagram.com/kristalespinoza_dev/" rel="noopener" target="_blank">Instagram</a></li>
+<li><a href="https://www.linkedin.com/in/kristal-espinoza-campos-99495820b/" rel="noopener" target="_blank">LinkedIn</a></li>
+</ul>
+</div>
+</div>
+<div class="footer__bottom">
+<span>Portafolio, <span id="year"></span>.</span>
+<span>Todos los derechos reservados.</span>
+</div>
+</div>
+</footer>
+<script>
+    // Cambia el fondo del nav al hacer scroll
+    const nav = document.getElementById('nav');
+    const onScroll = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 12);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Menú móvil
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Cambia entre la portada y la vista de proyectos
+    const views = {
+      inicio: document.getElementById('view-inicio'),
+      proyectos: document.getElementById('view-proyectos'),
+      detalle: document.getElementById('view-detalle'),
+    };
+
+    function showView(name) {
+      Object.entries(views).forEach(([key, el]) => {
+        el.hidden = key !== name;
+      });
+      if (name !== 'detalle') {
+        const video = document.getElementById('detalleVideo');
+        if (video) video.pause();
+        const yt = document.getElementById('detalleYoutube');
+        if (yt) yt.src = '';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('[data-view-link]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        showView(link.dataset.viewLink);
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Al hacer clic en un proyecto, muestra su página de detalle completa
+    const detalleVideo = document.getElementById('detalleVideo');
+    const detalleYoutube = document.getElementById('detalleYoutube');
+    const detalleImagen = document.getElementById('detalleImagen');
+    const detalleTitulo = document.getElementById('detalleTitulo');
+    const detalleDesc = document.getElementById('detalleDesc');
+    const detalleExtra = document.getElementById('detalleExtra');
+
+    document.querySelectorAll('.project').forEach((card) => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('.project__image');
+        const title = card.querySelector('.project__title');
+        const fullDesc = card.querySelector('.project__full-desc');
+        const shortDesc = card.querySelector('.project__details > p');
+        const video = card.querySelector('.project__extra-video');
+        const youtubeId = card.dataset.youtube;
+        const extraImages = card.querySelectorAll('.project__extra-image, .project__extra-caption, .project__extra-video-secondary');
+
+        detalleTitulo.textContent = title.textContent;
+        detalleDesc.innerHTML = fullDesc ? fullDesc.innerHTML : `<p>${shortDesc.textContent}</p>`;
+
+        detalleVideo.hidden = true;
+        detalleVideo.removeAttribute('src');
+        detalleYoutube.hidden = true;
+        detalleYoutube.src = '';
+        detalleImagen.hidden = true;
+
+        if (youtubeId) {
+          detalleYoutube.src = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&controls=1&rel=0&playsinline=1`;
+          detalleYoutube.hidden = false;
+        } else if (video) {
+          detalleVideo.src = video.getAttribute('src');
+          detalleVideo.hidden = false;
+          detalleVideo.currentTime = 0;
+          detalleVideo.play().catch(() => {});
+        } else {
+          detalleImagen.src = img.src;
+          detalleImagen.alt = img.alt;
+          detalleImagen.hidden = false;
+        }
+
+        detalleExtra.innerHTML = '';
+        extraImages.forEach((el) => {
+          detalleExtra.appendChild(el.cloneNode(true));
+        });
+
+        const galleryImgs = Array.from(detalleExtra.querySelectorAll('img'));
+        galleryImgs.forEach((imgEl, i) => {
+          imgEl.addEventListener('click', () => openGallery(galleryImgs, i));
+        });
+
+        showView('detalle');
+      });
+    });
+
+    // Lightbox de galería (imágenes medianas de cada proyecto)
+    const galleryLightbox = document.getElementById('galleryLightbox');
+    const galleryImage = document.getElementById('galleryImage');
+    let galleryList = [];
+    let galleryIndex = 0;
+
+    function showGalleryIndex(i) {
+      galleryIndex = (i + galleryList.length) % galleryList.length;
+      galleryImage.src = galleryList[galleryIndex].src;
+      galleryImage.alt = galleryList[galleryIndex].alt;
+    }
+
+    function openGallery(images, index) {
+      galleryList = images;
+      showGalleryIndex(index);
+      galleryLightbox.hidden = false;
+    }
+
+    document.getElementById('galleryPrev').addEventListener('click', () => showGalleryIndex(galleryIndex - 1));
+    document.getElementById('galleryNext').addEventListener('click', () => showGalleryIndex(galleryIndex + 1));
+
+    galleryLightbox.querySelectorAll('[data-gallery-close]').forEach((el) => {
+      el.addEventListener('click', () => {
+        galleryLightbox.hidden = true;
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (galleryLightbox.hidden) return;
+      if (event.key === 'Escape') galleryLightbox.hidden = true;
+      if (event.key === 'ArrowLeft') showGalleryIndex(galleryIndex - 1);
+      if (event.key === 'ArrowRight') showGalleryIndex(galleryIndex + 1);
+    });
+
+    // Carrusel de herramientas
+    const carouselTrack = document.getElementById('carouselTrack');
+    if (carouselTrack) {
+      document.querySelectorAll('.carousel__arrow').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const dir = btn.classList.contains('carousel__arrow--left') ? -1 : 1;
+          carouselTrack.scrollBy({ left: dir * 200, behavior: 'smooth' });
+        });
+      });
+    }
+
+    // Carrusel de imágenes de cada actividad
+    document.querySelectorAll('.activity-carousel').forEach((carousel) => {
+      const images = carousel.querySelectorAll('.activity-carousel__image');
+      let current = 0;
+
+      const goTo = (index) => {
+        const prev = images[current];
+        if (prev.tagName === 'VIDEO') prev.pause();
+        prev.classList.remove('is-active');
+        current = (index + images.length) % images.length;
+        images[current].classList.add('is-active');
+      };
+
+      carousel.querySelector('.activity-carousel__arrow--prev').addEventListener('click', () => goTo(current - 1));
+      carousel.querySelector('.activity-carousel__arrow--next').addEventListener('click', () => goTo(current + 1));
+    });
+
+    // Lightbox de certificados de idiomas
+    const certLightbox = document.getElementById('certLightbox');
+    document.querySelectorAll('.language-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        const targetId = card.dataset.cert;
+        certLightbox.querySelectorAll('.lightbox__image').forEach((img) => {
+          img.hidden = img.id !== targetId;
+        });
+        certLightbox.hidden = false;
+      });
+    });
+
+    certLightbox.querySelectorAll('[data-lightbox-close]').forEach((el) => {
+      el.addEventListener('click', () => {
+        certLightbox.hidden = true;
+      });
+    });
+
+    // Forzar silencio permanente en el reproductor principal, video extra y video secundario
+    const videoDetalle = document.getElementById('detalleVideo');
+    const videoProyecto = document.querySelector('.project__extra-video');
+    const videoSecundario = document.querySelector('.project__extra-video-secondary');
+
+    [ videoSecundario].forEach((video) => {
+      if (video) {
+        // 1. Silenciar inmediatamente
+        video.muted = true;
+        video.volume = 0;
+
+        // 2. Bloquear cualquier intento de activar el audio
+        video.addEventListener('volumechange', () => {
+          video.muted = true;
+          video.volume = 0;
+        });
+      }
+    });
+
+    // Función para forzar silencio únicamente en el video 2
+const mutearVideo2 = (video) => {
+  if (!video) return;
+  video.muted = true;
+  video.volume = 0;
+  video.addEventListener('volumechange', () => {
+    video.muted = true;
+    video.volume = 0;
+  });
+};
+
+// 1. Silenciar los videos secundarios (.project__extra-video-secondary) al cargar la página
+document.querySelectorAll('.project__extra-video-secondary').forEach(mutearVideo2);
+
+// 2. Silenciar la copia cuando se abre el detalle del proyecto
+document.querySelectorAll('.project').forEach((card) => {
+  card.addEventListener('click', () => {
+    const extraImages = card.querySelectorAll('.project__extra-image, .project__extra-caption, .project__extra-video-secondary');
+
+    detalleExtra.innerHTML = '';
+    extraImages.forEach((el) => {
+      const clone = el.cloneNode(true);
+
+      // Si el elemento clonado es el video 2
+      if (clone.classList.contains('project__extra-video-secondary')) {
+        mutearVideo2(clone);
+      } else {
+        const videoInterno = clone.querySelector('.project__extra-video-secondary');
+        if (videoInterno) mutearVideo2(videoInterno);
+      }
+
+      detalleExtra.appendChild(clone);
+    });
+  });
+});
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !certLightbox.hidden) certLightbox.hidden = true;
+    });
+
+    // Año actual en el footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
