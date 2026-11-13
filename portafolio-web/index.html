@@ -8,7 +8,7 @@
 <meta content="Nova ayuda a marcas a construir productos digitales que funcionan, desde el diseño hasta el código." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;family=Press+Start+2P&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --paper: #010807;
@@ -1189,15 +1189,16 @@
     }
   }
 
-  /* ---------- Selector de niveles (gancho hacia proyectos) ---------- */
+  /* ---------- Proyectos destacados en portada ---------- */
   .arcade { position: relative; }
   .arcade__head { text-align: center; margin-bottom: var(--space-3); }
   .arcade__kicker {
-    font-family: "Press Start 2P", monospace;
-    font-size: 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
     color: var(--gold);
-    letter-spacing: 0.08em;
-    animation: arcade-blink 1.2s steps(2, start) infinite;
+    letter-spacing: 0.14em;
+    margin: 0;
   }
   .arcade__title {
     font-family: var(--font-display);
@@ -1228,7 +1229,7 @@
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
   .level:hover, .level:focus-visible {
-    transform: translateY(-6px) rotate(-1deg);
+    transform: translateY(-6px);
     border-color: var(--gold);
     box-shadow: 0 0 0 1px var(--gold), 0 14px 40px rgba(39, 135, 125, 0.35);
     outline: none;
@@ -1251,14 +1252,15 @@
   .level__screen::after {
     content: "";
     position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0 1px, transparent 1px 3px);
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.35));
     pointer-events: none;
   }
   .level__tag {
     position: absolute; top: 10px; left: 10px; z-index: 1;
-    font-family: "Press Start 2P", monospace;
-    font-size: 0.55rem;
-    padding: 6px 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 4px 9px;
     background: var(--panel);
     border-radius: 4px;
   }
@@ -1268,11 +1270,10 @@
   .level__play {
     margin-top: auto;
     padding-top: 0.5rem;
-    font-family: "Press Start 2P", monospace;
-    font-size: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--gold);
   }
-  .level:hover .level__play { animation: arcade-blink 0.6s steps(2, start) infinite; }
 
   .arcade__more { text-align: center; margin-top: var(--space-3); }
 
@@ -1281,23 +1282,22 @@
     position: fixed;
     right: 20px; bottom: 20px;
     z-index: 50;
-    font-family: "Press Start 2P", monospace;
-    font-size: 0.65rem;
-    padding: 14px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 12px 18px;
     color: var(--ink);
     background: var(--panel);
-    border: 2px solid var(--ink);
-    border-radius: 8px;
-    box-shadow: 4px 4px 0 var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     text-decoration: none;
     opacity: 0;
     transform: translateY(20px);
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
-  .press-start.is-visible { opacity: 1; transform: none; pointer-events: auto; animation: press-bounce 2.4s ease-in-out infinite; }
-  .press-start:hover { box-shadow: 2px 2px 0 var(--gold); transform: translate(2px, 2px); animation: none; }
-  @keyframes press-bounce { 0%, 85%, 100% { transform: none; } 90% { transform: translateY(-6px); } 95% { transform: translateY(0); } }
+  .press-start.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+  .press-start:hover { background: var(--forest); }
 </style>
 </head>
 <body>
@@ -1390,31 +1390,31 @@
 </header>
 <section class="wrap section arcade" id="niveles">
 <div class="arcade__head">
-<p class="arcade__kicker">▶ PRESS START</p>
-<h2 class="arcade__title">Elige tu nivel</h2>
-<p class="arcade__sub">Cada proyecto es un mundo distinto. Pasa el mouse para ver un adelanto y haz clic para jugar.</p>
+<p class="arcade__kicker">Selección</p>
+<h2 class="arcade__title">Proyectos destacados</h2>
+<p class="arcade__sub">De las bioseñales a la interacción en tiempo real. Pasa el cursor para ver un adelanto.</p>
 </div>
 <div class="arcade__grid">
 <button class="level" data-project-index="0" type="button">
-<div class="level__screen"><span class="level__tag">NIVEL 1</span><img alt="" loading="lazy" src="assets/img-04-e3787bf5f0.jpg"/><video muted loop playsinline preload="none" data-src="assets/video-06-74d205f45e.mp4"></video></div>
-<div class="level__body"><span class="level__name">Shooter con Electromiograma</span><span class="level__power">Poder: disparas con la fuerza de tus músculos</span><span class="level__play">▶ JUGAR</span></div>
+<div class="level__screen"><span class="level__tag">Bioseñales · Unity</span><img alt="" loading="lazy" src="assets/img-04-e3787bf5f0.jpg"/><video muted loop playsinline preload="none" data-src="assets/video-06-74d205f45e.mp4"></video></div>
+<div class="level__body"><span class="level__name">Shooter con Electromiograma</span><span class="level__power">Videojuego controlado con la actividad muscular del jugador mediante EMG.</span><span class="level__play">Ver proyecto →</span></div>
 </button>
 <button class="level" data-project-index="2" type="button">
-<div class="level__screen"><span class="level__tag">NIVEL 2</span><img alt="" loading="lazy" src="assets/img-10-8aba0243c4.jpg"/><video muted loop playsinline preload="none" data-src="assets/video-11-0aa9308111.mp4"></video></div>
-<div class="level__body"><span class="level__name">Cracked Brain</span><span class="level__power">Poder: un videojuego hecho en Unity</span><span class="level__play">▶ JUGAR</span></div>
+<div class="level__screen"><span class="level__tag">Videojuego · Unity</span><img alt="" loading="lazy" src="assets/img-10-8aba0243c4.jpg"/><video muted loop playsinline preload="none" data-src="assets/video-11-0aa9308111.mp4"></video></div>
+<div class="level__body"><span class="level__name">Cracked Brain</span><span class="level__power">Videojuego desarrollado en Unity.</span><span class="level__play">Ver proyecto →</span></div>
 </button>
 <button class="level" data-project-index="4" type="button">
-<div class="level__screen"><span class="level__tag">NIVEL 3</span><img alt="" loading="lazy" src="assets/unreal-arduino-interaccion.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-arduino-interaccion.mp4"></video></div>
-<div class="level__body"><span class="level__name">Arduino × Unreal Engine</span><span class="level__power">Poder: tocas un circuito y el mundo reacciona</span><span class="level__play">▶ JUGAR</span></div>
+<div class="level__screen"><span class="level__tag">Arduino · Unreal</span><img alt="" loading="lazy" src="assets/unreal-arduino-interaccion.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-arduino-interaccion.mp4"></video></div>
+<div class="level__body"><span class="level__name">Arduino × Unreal Engine</span><span class="level__power">Un circuito físico activa luces y reacciones del personaje en tiempo real.</span><span class="level__play">Ver proyecto →</span></div>
 </button>
 <button class="level" data-project-index="5" type="button">
-<div class="level__screen"><span class="level__tag">NIVEL 4</span><img alt="" loading="lazy" src="assets/unreal-metahuman-livelink.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-metahuman-livelink.mp4"></video></div>
-<div class="level__body"><span class="level__name">Mi cara en un MetaHuman</span><span class="level__power">Poder: tus gestos controlan un personaje</span><span class="level__play">▶ JUGAR</span></div>
+<div class="level__screen"><span class="level__tag">Live Link · Unreal</span><img alt="" loading="lazy" src="assets/unreal-metahuman-livelink.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-metahuman-livelink.mp4"></video></div>
+<div class="level__body"><span class="level__name">Captura facial con MetaHuman</span><span class="level__power">Animación facial en tiempo real desde un iPad con Live Link Face.</span><span class="level__play">Ver proyecto →</span></div>
 </button>
 </div>
-<div class="arcade__more"><a class="btn btn--primary" data-view-link="proyectos" href="#proyectos">Ver todos los niveles →</a></div>
+<div class="arcade__more"><a class="btn btn--primary" data-view-link="proyectos" href="#proyectos">Ver todos los proyectos →</a></div>
 </section>
-<a class="press-start" data-view-link="proyectos" href="#proyectos" id="pressStart" aria-label="Ver proyectos">▶ PRESS START</a>
+<a class="press-start" data-view-link="proyectos" href="#proyectos" id="pressStart">Ver proyectos →</a>
 <section class="wrap section" id="experiencia">
 <div class="section__head">
 <h2 class="section__title">Experiencia laboral</h2>
@@ -2004,7 +2004,7 @@ document.querySelectorAll('.project').forEach((card) => {
     // Año actual en el footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-  // ---------- Selector de niveles ----------
+  // ---------- Proyectos destacados en portada ----------
   (function () {
     const projectCards = document.querySelectorAll('#view-proyectos .project');
     const canHover = window.matchMedia('(hover: hover)').matches;
