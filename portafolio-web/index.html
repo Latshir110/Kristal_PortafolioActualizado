@@ -1275,6 +1275,19 @@
     color: var(--gold);
   }
 
+  .level__actions { margin-top: auto; display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; }
+  .level__actions .level__play { margin-top: 0; }
+  .level__git {
+    padding-top: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .level__git:hover, .level__git:focus-visible { color: var(--ink); }
+
   .arcade__more { text-align: center; margin-top: var(--space-3); }
 
   /* Botón flotante PRESS START */
@@ -1625,7 +1638,7 @@
 </button>
 <button class="level" data-project-index="4" type="button">
 <div class="level__screen"><span class="level__tag">Arduino · Unreal</span><img alt="" loading="lazy" src="assets/unreal-arduino-interaccion.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-arduino-interaccion.mp4"></video></div>
-<div class="level__body"><span class="level__name">Arduino × Unreal Engine</span><span class="level__power">Un circuito físico activa luces y reacciones del personaje en tiempo real.</span><span class="level__play">Ver proyecto →</span></div>
+<div class="level__body"><span class="level__name">Arduino × Unreal Engine</span><span class="level__power">Un circuito físico activa luces y reacciones del personaje en tiempo real.</span><span class="level__actions"><span class="level__play">Ver proyecto →</span><span class="level__git" data-href="https://github.com/Latshir110/Candy-Sensors" role="link" tabindex="0">GitHub ↗</span></span></div>
 </button>
 <button class="level" data-project-index="5" type="button">
 <div class="level__screen"><span class="level__tag">Live Link · Unreal</span><img alt="" loading="lazy" src="assets/unreal-metahuman-livelink.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-metahuman-livelink.mp4"></video></div>
@@ -2168,6 +2181,18 @@ document.querySelectorAll('.project').forEach((card) => {
     const projectCards = document.querySelectorAll('#view-proyectos .project');
     const canHover = window.matchMedia('(hover: hover)').matches;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.querySelectorAll('.level__git').forEach((link) => {
+      const open = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        window.open(link.dataset.href, '_blank', 'noopener');
+      };
+      link.addEventListener('click', open);
+      link.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') open(event);
+      });
+    });
 
     document.querySelectorAll('.level').forEach((level) => {
       const video = level.querySelector('video');
