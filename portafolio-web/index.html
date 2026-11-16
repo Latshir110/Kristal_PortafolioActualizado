@@ -1177,6 +1177,25 @@
     box-shadow: 0 0 22px rgba(39, 135, 125, 0.45);
   }
 
+  .project__ctas {
+    justify-self: start;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .project__ctas .unreal-cta { margin-top: var(--space-2); }
+  .project__git {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .project__git:hover, .project__git:focus-visible { color: var(--ink); }
+
   @media (max-width: 860px) {
     .project--featured {
       grid-template-columns: 1fr;
@@ -1274,19 +1293,6 @@
     font-weight: 600;
     color: var(--gold);
   }
-
-  .level__actions { margin-top: auto; display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; }
-  .level__actions .level__play { margin-top: 0; }
-  .level__git {
-    padding-top: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--ink-soft);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    cursor: pointer;
-  }
-  .level__git:hover, .level__git:focus-visible { color: var(--ink); }
 
   .arcade__more { text-align: center; margin-top: var(--space-3); }
 
@@ -1638,7 +1644,7 @@
 </button>
 <button class="level" data-project-index="4" type="button">
 <div class="level__screen"><span class="level__tag">Arduino · Unreal</span><img alt="" loading="lazy" src="assets/unreal-arduino-interaccion.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-arduino-interaccion.mp4"></video></div>
-<div class="level__body"><span class="level__name">Arduino × Unreal Engine</span><span class="level__power">Un circuito físico activa luces y reacciones del personaje en tiempo real.</span><span class="level__actions"><span class="level__play">Ver proyecto →</span><span class="level__git" data-href="https://github.com/Latshir110/Candy-Sensors" role="link" tabindex="0">GitHub ↗</span></span></div>
+<div class="level__body"><span class="level__name">Arduino × Unreal Engine</span><span class="level__power">Un circuito físico activa luces y reacciones del personaje en tiempo real.</span><span class="level__play">Ver proyecto →</span></div>
 </button>
 <button class="level" data-project-index="5" type="button">
 <div class="level__screen"><span class="level__tag">Live Link · Unreal</span><img alt="" loading="lazy" src="assets/unreal-metahuman-livelink.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-metahuman-livelink.mp4"></video></div>
@@ -1761,7 +1767,7 @@
 <img alt="Arduino conectado a Unreal Engine - personaje reaccionando con luz roja" class="project__image" src="assets/unreal-arduino-interaccion.jpg"/>
 <h3 class="project__title">Interacción física con Arduino en Unreal Engine</h3>
 <p class="project__desc">Conexión de un Arduino con Unreal Engine: al tocar el circuito, el motor recibe la señal y activa en tiempo real una luz y una reacción del personaje.</p>
-<span class="unreal-cta">▶ Ver video</span>
+<span class="project__ctas"><span class="unreal-cta">▶ Ver video</span><span class="project__git" data-href="https://github.com/Latshir110/Candy-Sensors" role="link" tabindex="0">Ver código en GitHub ↗</span></span>
 <div class="project__details" hidden="">
 <div class="project__full-desc">
 <p>Conexión de un Arduino con Unreal Engine: al tocar el circuito, el motor recibe la señal y activa en tiempo real una luz y una reacción del personaje.</p>
@@ -2182,7 +2188,7 @@ document.querySelectorAll('.project').forEach((card) => {
     const canHover = window.matchMedia('(hover: hover)').matches;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    document.querySelectorAll('.level__git').forEach((link) => {
+    document.querySelectorAll('.project__git').forEach((link) => {
       const open = (event) => {
         event.stopPropagation();
         event.preventDefault();
