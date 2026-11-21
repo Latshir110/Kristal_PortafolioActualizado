@@ -933,9 +933,20 @@
     border-color: var(--forest);
   }
 
+  .detail__extra img.project__extra-image--wide {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: #1b1b1b;
+  }
+  .detail__extra img.project__extra-image--code { max-width: 420px; }
+
   .detail__extra video {
     display: block;
     width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    background: #000;
     border-radius: 8px;
     border: 1px solid var(--line);
   }
@@ -1181,20 +1192,32 @@
     justify-self: start;
     align-self: start;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.6rem;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: var(--space-2);
   }
-  .project__ctas .unreal-cta { margin-top: var(--space-2); }
-  .project__git {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--ink-soft);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  .project__ctas .unreal-cta { margin-top: 0; }
+  .project__git, .btn--git {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.65rem 1.2rem;
+    border-radius: 4px;
+    border: 1.5px solid var(--forest);
+    background: rgba(39, 135, 125, 0.12);
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
     cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
   }
-  .project__git:hover, .project__git:focus-visible { color: var(--ink); }
+  .project__git:hover, .project__git:focus-visible,
+  .btn--git:hover, .btn--git:focus-visible { background: var(--forest); color: var(--paper); }
+  .project__git svg, .btn--git svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+  .project__tools { font-size: 0.9rem; color: var(--ink-soft); }
+  .project__tools b { color: var(--ink); }
 
   @media (max-width: 860px) {
     .project--featured {
@@ -1546,7 +1569,7 @@
 <p class="experience-company">Universidad Bernardo O'Higgins · Contrato temporal</p>
 <p class="experience-location">Región Metropolitana de Santiago, Chile · Presencial</p>
 <p class="experience-desc">
-              Trabajo de investigación sobre avatares diferentes con hápticas, en colaboración con el University College London (Knowledge Lab) y la Université PSL (Spatial Media).
+              Investigación sobre avatares no antropomórficos con hápticas, en colaboración con University College London (Knowledge Lab) y la Université PSL (Spatial Media).
             </p>
 <ul class="experience-list">
 <li>Desarrollo de un protocolo para un sistema de avatares no antropomórficos y no figurativos mediante un sistema de estimulación muscular eléctrica.</li>
@@ -1597,7 +1620,7 @@
 <button aria-label="Imagen siguiente" class="activity-carousel__arrow activity-carousel__arrow--next" type="button">→</button>
 </div>
 <h3 class="activity-card__title">Charlista en eventos de tecnología y videojuegos</h3>
-<p class="activity-card__desc">Realizo activamente charlas sobre videojuegos biónicos, accesibilidad y tecnología, imágenes de ponencia en el tercer Congreso de Diseño de Juegos Digitales: Cultura y Videojuegos de la Universidad Andrés Bello.</p>
+<p class="activity-card__desc">Realizo charlas sobre videojuegos biónicos, accesibilidad y tecnología. Aquí, imágenes de mi ponencia en el III Congreso de Diseño de Juegos Digitales: Cultura y Videojuegos de la Universidad Andrés Bello.</p>
 </div>
 <div class="activity-card">
 <img alt="Certificado de participación en Academia de Liderazgo UBO" class="activity-card__image" src="assets/img-41-f3cbfdf121.jpg"/>
@@ -1614,7 +1637,7 @@
 <button aria-label="Siguiente" class="activity-carousel__arrow activity-carousel__arrow--next" type="button">→</button>
 </div>
 <h3 class="activity-card__title">Certificado de Reconocimiento Social Impact Game</h3>
-<p class="activity-card__desc">Expedido por Ministerio de Educación · may. 2024. Reconocimiento por Lograr Segundo Lugar en Game Jam Social Impact Game.</p>
+<p class="activity-card__desc">Expedido por el Ministerio de Educación · may. 2024. Reconocimiento por obtener el segundo lugar en la Game Jam Social Impact Game.</p>
 </div>
 <div class="activity-card">
 <img alt="Certificado Masterclass Virtual Production ICVFX de Virtual Production Academy y Madis Films" class="activity-card__image" src="assets/certificado-madisfilms-icvfx.jpg"/>
@@ -1691,14 +1714,14 @@
 <button aria-expanded="false" class="project" type="button">
 <img alt="Videojuego Shooter con Electromiograma" class="project__image" src="assets/img-04-e3787bf5f0.jpg"/>
 <h3 class="project__title">Videojuego Shooter con Electromiograma</h3>
-<p class="project__desc">Presento EMG SHOOTER, un innovador proyecto que busca brindar accesibilidad a personas con discapacidad manual en el mundo de los videojuegos.</p>
+<p class="project__desc">EMG Shooter es un proyecto que busca brindar accesibilidad a personas con discapacidad manual en el mundo de los videojuegos.</p>
 <div class="project__details" hidden="">
 <div class="project__full-desc">
-<p>Presento EMG SHOOTER, un innovador proyecto que busca brindar accesibilidad a personas con discapacidad manual en el mundo de los videojuegos. Mi idea es crear un videojuego shooter que se controle mediante la intención de movimiento del brazo, utilizando señales biológicas para detectar el movimiento.</p>
-<p>Para lograr esto, utilicé tecnologías como Unity y Arduino, conectándolas para que las ondas eléctricas de las señales biológicas del brazo sean detectadas por Unity como un disparo, cuando se lea una amplitud de las ondas.</p>
+<p>EMG Shooter es un proyecto que busca brindar accesibilidad a personas con discapacidad manual en el mundo de los videojuegos. Es un videojuego de disparos que se controle mediante la intención de movimiento del brazo, utilizando señales biológicas para detectar el movimiento.</p>
+<p>Para lograr esto, utilicé tecnologías como Unity y Arduino, conectándolas para que las ondas eléctricas de las señales biológicas del brazo sean detectadas por Unity como un disparo cuando la amplitud de la onda supera un umbral.</p>
 </div>
 <img alt="Nota sobre el proyecto EMG Shooter" class="project__extra-image" src="assets/img-05-ff4b0a32d2.jpg"/>
-<p class="project__extra-caption">Mención y reconocimiento de mi proyecto EMG Shooter en la sección de noticias carrera en Ingeniería en Realidad Virtual y Diseño de Juegos Digitales.<br/>
+<p class="project__extra-caption">Mención y reconocimiento de mi proyecto EMG Shooter en la sección de noticias de la carrera de Ingeniería en Realidad Virtual y Diseño de Juegos Digitales.<br/>
 <a href="https://admision.ubo.cl/emg-shooter-videojuego-con-tecnologia-bionica-que-revoluciona-la-accesibilidad" rel="noopener" target="_blank">admision.ubo.cl/emg-shooter-videojuego-con-tecnologia-bionica-que-revoluciona-la-accesibilidad</a>
 </p>
 <video class="project__extra-video" preload="none" src="assets/video-06-74d205f45e.mp4"></video>
@@ -1707,10 +1730,10 @@
 <button aria-expanded="false" class="project" type="button">
 <img alt="Electrocardiograma aplicado en Unity" class="project__image" src="assets/img-07-41c90bd552.jpg"/>
 <h3 class="project__title">Electrocardiograma aplicado en Unity</h3>
-<p class="project__desc">Se usó un electrocardiograma para un proyecto conectado a Unity, donde cada pulso se traducía en un efecto dentro del motor.</p>
+<p class="project__desc">Proyecto en Unity con un electrocardiograma: cada pulso se traduce en un efecto dentro del motor.</p>
 <div class="project__details" hidden="">
 <div class="project__full-desc">
-<p>Se ocupó un electrocardiograma para realizar un proyecto conectado a Unity, donde cada pulso se traducía a un efecto en el motor de Unity.</p>
+<p>Proyecto conectado a Unity con un electrocardiograma: cada pulso del corazón se traduce en un efecto dentro del motor.</p>
 </div>
 <img alt="Electrodos conectados al Arduino" class="project__extra-image" src="assets/img-08-1f4e5e8ab1.jpg"/>
 <video class="project__extra-video" preload="none" src="assets/video-09-cb6be9dbdb.mp4"></video>
@@ -1729,7 +1752,7 @@
 <p class="project__desc">Videojuego multijugador tipo Deathmatch desarrollado en Unity utilizando Photon para funcionalidades multijugador en tiempo real.</p>
 <div class="project__details" hidden="">
 <div class="project__full-desc">
-<p>Proyecto desarrollado en Unity utilizando Photon para la implementación de funcionalidades multijugador en tiempo real. Se desarrolló un videojuego multiplayer de tipo Deathmatch, incorporando sincronización de jugadores, sistema de combate y gestión de partidas.</p>
+<p>Proyecto desarrollado en Unity utilizando Photon para la implementación de funcionalidades multijugador en tiempo real. Se desarrolló un videojuego multijugador de tipo Deathmatch, incorporando sincronización de jugadores, sistema de combate y gestión de partidas.</p>
 </div>
 <video class="project__extra-video" preload="none"  src="assets/video-11-0aa9308111.mp4"></video>
 <video class="project__extra-video-secondary" muted controls="" preload="none" src="assets/video-12-3b3175f2ab.mp4"></video>
@@ -1753,11 +1776,11 @@
 <button aria-expanded="false" class="project project--featured" data-youtube="oVrIo5YjJWE" type="button">
 
 <img alt="Escenario 3D - render del escenario" class="project__image" src="assets/img-13-e65ad56c24.png"/>
-<h3 class="project__title">Cinematica/Jugabilidad en Unreal Engine</h3>
-<p class="project__desc">Trabajo de realización de escenario, trabaje en Uv, texturizado, implementación del Timeline y Blueprints en el motor</p>
+<h3 class="project__title">Cinemática y jugabilidad en Unreal Engine</h3>
+<p class="project__desc">Creación de un escenario en Unreal Engine: UV, texturizado e implementación de Timeline y Blueprints.</p>
 <span class="unreal-cta">▶ Ver cinemática</span>
 <div class="project__details" hidden="">
-<div class="project__full-desc"><p>Trabajo de realización de escenario, trabaje en Uv, texturizado, implementación del Timeline y Blueprints en el motor</p></div>
+<div class="project__full-desc"><p>Creación de un escenario en Unreal Engine: UV, texturizado e implementación de Timeline y Blueprints.</p></div>
 <img alt="Escenario 3D - vista renderizada" class="project__extra-image" src="assets/img-13-e65ad56c24.png"/>
 <img alt="Escenario 3D - detalle del render" class="project__extra-image" src="assets/img-14-c4d6659586.png"/>
 <img alt="Escenario 3D - vista del proyecto en Blender" class="project__extra-image" src="assets/img-15-0009b2f9ed.png"/>
@@ -1767,18 +1790,25 @@
 <img alt="Servomotor conectado a Arduino que se mueve al recoger un dulce en Unreal Engine" class="project__image" src="assets/candy-sensors-servo.jpg"/>
 <h3 class="project__title">Candy Sensors: Arduino × Unreal Engine</h3>
 <p class="project__desc">Comunicación en ambos sentidos entre Arduino y Unreal Engine 5.5: botones físicos controlan el juego y el juego mueve un servomotor real.</p>
-<span class="project__ctas"><span class="unreal-cta">▶ Ver video</span><span class="project__git" data-href="https://github.com/Latshir110/Candy-Sensors" role="link" tabindex="0">Ver código en GitHub ↗</span></span>
+<span class="project__ctas"><span class="unreal-cta">▶ Ver video</span><span class="project__git" data-href="https://github.com/Latshir110/Candy-Sensors" role="link" tabindex="0"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Ver código en GitHub</span></span>
 <div class="project__details" hidden="">
 <div class="project__full-desc">
 <p>Prototipo para probar si se puede unir el mundo físico con el virtual usando Arduino y el plugin SerialCOM en Unreal Engine 5.5.</p>
 <p>Al recoger un dulce en el juego, Unreal envía un comando por el puerto serial y el Arduino gira un servomotor. El evento virtual se convierte en un movimiento real.</p>
-<p><a class="btn btn--ghost" href="https://github.com/Latshir110/Candy-Sensors" rel="noopener" target="_blank">Ver código en GitHub ↗</a></p>
+<p class="project__tools"><b>Herramientas:</b> Unreal Engine 5.5, Blueprints, Arduino Uno (C++), plugin SerialCOM, servomotor.</p>
+<p><b>Resultado:</b> la comunicación funciona en ambos sentidos. Arduino envía datos que Unreal muestra y usa como acciones del jugador, y Unreal envía comandos que mueven hardware real.</p>
+<p><b>Dificultades:</b> la lectura del puerto ocurre en el hilo principal del juego, así que hay que equilibrar la velocidad de envío del Arduino con los FPS para evitar retrasos. Además, el plugin depende de la versión del motor y hay que recompilarlo al actualizar Unreal.</p>
+<p><a class="btn--git" href="https://github.com/Latshir110/Candy-Sensors" rel="noopener" target="_blank"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Ver código en GitHub</a></p>
 </div>
 <video class="project__extra-video" preload="none" src="assets/candy-sensors-servo.mp4"></video>
+<p class="project__extra-caption"><b>Blueprint:</b> al tocar el dulce, el personaje lo suma al contador y Unreal envía el comando "A" por el puerto serial.</p>
+<img alt="Blueprint de Unreal Engine que envía el comando A al Arduino al recoger un dulce" class="project__extra-image project__extra-image--wide" src="assets/candy-sensors-blueprint.jpg"/>
+<p class="project__extra-caption"><b>Código Arduino:</b> al recibir "A", el servomotor gira a 90° durante medio segundo y vuelve a su posición.</p>
+<img alt="Código de Arduino que mueve el servomotor al recibir el comando A" class="project__extra-image project__extra-image--wide project__extra-image--code" src="assets/candy-sensors-arduino.jpg"/>
 <p class="project__extra-caption"><b>Prueba 1: contador.</b> El Arduino envía números y aparecen en tiempo real en Unreal, confirmando la conexión.</p>
-<video class="project__extra-video-secondary" muted controls="" playsinline preload="none" src="assets/candy-sensors-contador.mp4"></video>
+<video class="project__extra-video-secondary" muted controls="" playsinline preload="none" poster="assets/candy-sensors-contador.jpg" src="assets/candy-sensors-contador.mp4"></video>
 <p class="project__extra-caption"><b>Prueba 2: botón y linterna.</b> Un botón físico enciende y apaga la linterna del personaje, sin usar el teclado.</p>
-<video class="project__extra-video-secondary" muted controls="" playsinline preload="none" src="assets/unreal-arduino-interaccion.mp4"></video>
+<video class="project__extra-video-secondary" muted controls="" playsinline preload="none" poster="assets/unreal-arduino-interaccion-poster.jpg" src="assets/unreal-arduino-interaccion.mp4"></video>
 </div>
 </button>
 <button aria-expanded="false" class="project project--featured" type="button">
