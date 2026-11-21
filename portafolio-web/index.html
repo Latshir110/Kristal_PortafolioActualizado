@@ -1786,7 +1786,7 @@
 <img alt="Escenario 3D - vista del proyecto en Blender" class="project__extra-image" src="assets/img-15-0009b2f9ed.png"/>
 </div>
 </button>
-<button aria-expanded="false" class="project project--featured" type="button">
+<button aria-expanded="false" class="project project--featured" data-slug="candy-sensors" type="button">
 <img alt="Servomotor conectado a Arduino que se mueve al recoger un dulce en Unreal Engine" class="project__image" src="assets/candy-sensors-servo.jpg"/>
 <h3 class="project__title">Candy Sensors: Arduino × Unreal Engine</h3>
 <p class="project__desc">Comunicación en ambos sentidos entre Arduino y Unreal Engine 5.5: botones físicos controlan el juego y el juego mueve un servomotor real.</p>
@@ -2303,6 +2303,14 @@ document.querySelectorAll('.project').forEach((card) => {
       });
     });
   })();
-  </script>
+  
+  // Enlace directo a un proyecto: /#candy-sensors abre su detalle
+  window.addEventListener('load', () => {
+    const slug = decodeURIComponent(location.hash.slice(1));
+    if (!slug) return;
+    const card = document.querySelector('.project[data-slug="' + slug + '"]');
+    if (card) card.click();
+  });
+</script>
 </body>
 </html>
