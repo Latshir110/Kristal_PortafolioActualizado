@@ -1643,8 +1643,8 @@
 <div class="level__body"><span class="level__name">Cracked Brain</span><span class="level__power">Videojuego desarrollado en Unity.</span><span class="level__play">Ver proyecto →</span></div>
 </button>
 <button class="level" data-project-index="4" type="button">
-<div class="level__screen"><span class="level__tag">Arduino · Unreal</span><img alt="" loading="lazy" src="assets/unreal-arduino-interaccion.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-arduino-interaccion.mp4"></video></div>
-<div class="level__body"><span class="level__name">Arduino × Unreal Engine</span><span class="level__power">Un circuito físico activa luces y reacciones del personaje en tiempo real.</span><span class="level__play">Ver proyecto →</span></div>
+<div class="level__screen"><span class="level__tag">Arduino · Unreal</span><img alt="" loading="lazy" src="assets/candy-sensors-servo.jpg"/><video muted loop playsinline preload="none" data-src="assets/candy-sensors-servo.mp4"></video></div>
+<div class="level__body"><span class="level__name">Candy Sensors</span><span class="level__power">Arduino y Unreal Engine se comunican en ambos sentidos.</span><span class="level__play">Ver proyecto →</span></div>
 </button>
 <button class="level" data-project-index="5" type="button">
 <div class="level__screen"><span class="level__tag">Live Link · Unreal</span><img alt="" loading="lazy" src="assets/unreal-metahuman-livelink.jpg"/><video muted loop playsinline preload="none" data-src="assets/unreal-metahuman-livelink.mp4"></video></div>
@@ -1764,16 +1764,21 @@
 </div>
 </button>
 <button aria-expanded="false" class="project project--featured" type="button">
-<img alt="Arduino conectado a Unreal Engine - personaje reaccionando con luz roja" class="project__image" src="assets/unreal-arduino-interaccion.jpg"/>
-<h3 class="project__title">Interacción física con Arduino en Unreal Engine</h3>
-<p class="project__desc">Conexión de un Arduino con Unreal Engine: al tocar el circuito, el motor recibe la señal y activa en tiempo real una luz y una reacción del personaje.</p>
+<img alt="Servomotor conectado a Arduino que se mueve al recoger un dulce en Unreal Engine" class="project__image" src="assets/candy-sensors-servo.jpg"/>
+<h3 class="project__title">Candy Sensors: Arduino × Unreal Engine</h3>
+<p class="project__desc">Comunicación en ambos sentidos entre Arduino y Unreal Engine 5.5: botones físicos controlan el juego y el juego mueve un servomotor real.</p>
 <span class="project__ctas"><span class="unreal-cta">▶ Ver video</span><span class="project__git" data-href="https://github.com/Latshir110/Candy-Sensors" role="link" tabindex="0">Ver código en GitHub ↗</span></span>
 <div class="project__details" hidden="">
 <div class="project__full-desc">
-<p>Conexión de un Arduino con Unreal Engine: al tocar el circuito, el motor recibe la señal y activa en tiempo real una luz y una reacción del personaje.</p>
+<p>Prototipo para probar si se puede unir el mundo físico con el virtual usando Arduino y el plugin SerialCOM en Unreal Engine 5.5.</p>
+<p>Al recoger un dulce en el juego, Unreal envía un comando por el puerto serial y el Arduino gira un servomotor. El evento virtual se convierte en un movimiento real.</p>
 <p><a class="btn btn--ghost" href="https://github.com/Latshir110/Candy-Sensors" rel="noopener" target="_blank">Ver código en GitHub ↗</a></p>
 </div>
-<video class="project__extra-video" preload="none" src="assets/unreal-arduino-interaccion.mp4"></video>
+<video class="project__extra-video" preload="none" src="assets/candy-sensors-servo.mp4"></video>
+<p class="project__extra-caption"><b>Prueba 1: contador.</b> El Arduino envía números y aparecen en tiempo real en Unreal, confirmando la conexión.</p>
+<video class="project__extra-video-secondary" muted controls="" playsinline preload="none" src="assets/candy-sensors-contador.mp4"></video>
+<p class="project__extra-caption"><b>Prueba 2: botón y linterna.</b> Un botón físico enciende y apaga la linterna del personaje, sin usar el teclado.</p>
+<video class="project__extra-video-secondary" muted controls="" playsinline preload="none" src="assets/unreal-arduino-interaccion.mp4"></video>
 </div>
 </button>
 <button aria-expanded="false" class="project project--featured" type="button">
